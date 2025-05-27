@@ -1,0 +1,18 @@
+
+provider "aws" {
+  region = "us-west-2"  # Replace with your desired region
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-075686beab831bb7f"  # Replace with your desired AMI ID
+  instance_type = "t2.xlarge"
+
+  root_block_device {
+    volume_size = 150  # Size in GB
+    volume_type = "gp3"  # SSD type (gp3 or gp2)
+  }
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
