@@ -253,7 +253,8 @@ const getThemeConfig = (settings = {}) => {
 
   return Object.freeze({
     typography: {
-      fontFamily: "'Ubuntu', sans-serif",
+      // fontFamily: "'Ubuntu', sans-serif",
+      fontFamily: "'Poppins', sans-serif",
       mono: {
         fontFamily: "'Ubuntu Mono', monospace"
       }
