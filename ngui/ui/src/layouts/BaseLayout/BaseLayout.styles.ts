@@ -11,7 +11,12 @@ const useStyles = makeStyles()((theme) => ({
     display: "flex",
     height: theme.spacing(7),
     justifyContent: "space-between",
-    backgroundColor: theme.palette.info.header
+    // backgroundColor: theme.palette.info.header
+
+    // Set the background to black
+    backgroundColor: theme.palette.common.black,
+    // Set the default color for all text and icons within the toolbar to white
+    color: theme.palette.common.white
   },
   logo: {
     [theme.breakpoints.down("md")]: {
