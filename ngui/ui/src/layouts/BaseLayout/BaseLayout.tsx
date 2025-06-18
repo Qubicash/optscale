@@ -103,145 +103,104 @@ const getLogoSize = (isDemo = false, isDownMd = false, isDownSm = false) => {
 //   );
 // };
 // ***** FINAL CODE WITH PROFESSIONAL COMMENTS *****
- 
+ // ***** NEW CODE *****
+
 const AppToolbar = ({
-
   onMenuIconClick,
-
   showMainMenu = false,
-
   showOrganizationSelector = false,
-
   isOrganizationSelectorLoading = false,
-
   isProductTourAvailable = false
-
 }) => {
-
   const { classes, cx } = useStyles();
-
   const navigate = useNavigate();
-
   const isDownMd = useIsDownMediaQuery("md");
-
   const isDownSm = useIsDownMediaQuery("sm");
- 
+
   const { isDemo } = useOrganizationInfo();
- 
+
   const onLiveDemoRegisterClick = () => {
-
     navigate(REGISTER);
-
     trackEvent({ category: GA_EVENT_CATEGORIES.LIVE_DEMO, action: "Try register" });
-
   };
- 
+
   return (
-<Toolbar className={classes.toolbar}>
-
+    <Toolbar className={classes.toolbar}>
       {/* 
-
         SECTION 1: Left-Aligned Content
-
         This container holds the mobile menu icon and the company logo, 
-
         ensuring they remain fixed to the left side of the toolbar.
-
       */}
-<Box sx={{ display: 'flex', alignItems: 'center' }}>
-
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         {showMainMenu && (
-<IconButton
-
-            sx={{ display: { xs: 'inherit', md: 'none' } }}
-
+          <IconButton
+            sx={{ display: { xs: "inherit", md: "none" } }}
             customClass={classes.marginRight1}
-
             icon={<MenuIcon />}
-
-            color="primary"
-
+            // CHANGED: "primary" to "inherit" to take the parent's (toolbar's) white color
+            color="inherit"
             onClick={onMenuIconClick}
-
             aria-label="open drawer"
-
           />
-
         )}
-<div style={{ height: logoHeight }} className={classes.logo}>
-<Logo size={getLogoSize(isDemo, isDownMd, isDownSm)} dataTestId="img_logo" height={logoHeight} demo={isDemo} active />
-</div>
-</Box>
- 
-      {/* 
+        <div style={{ height: logoHeight }} className={classes.logo}>
+          <Logo size={getLogoSize(isDemo, isDownMd, isDownSm)} dataTestId="img_logo" height={logoHeight} demo={isDemo} active />
+        </div>
+      </Box>
 
+      {/* 
         SECTION 2: Centered Title (New Addition)
-
         This Box uses `flexGrow: 1` to occupy all available space between the left and right elements.
-
         `textAlign: 'center'` then centers the Typography component within that expanded space.
-
         This is the standard MUI pattern for centering an element in a toolbar.
-
       */}
-<Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-<Typography variant="h6" component="div" color="primary">
-
+      <Box sx={{ flexGrow: 1, textAlign: "center" }}>
+        <Typography variant="h6" component="div" 
+            // CHANGED: "primary" to "inherit" to take the parent's (toolbar's) white color
+            color="inherit">
           Zensar | Finops
-</Typography>
-</Box>
- 
+        </Typography>
+      </Box>
+
       {/* 
-
         SECTION 3: Right-Aligned Content
-
         This container holds all components that should appear on the right side of the toolbar,
-
         such as the organization selector and other header action buttons.
-
       */}
-<Box sx={{ display: 'flex', alignItems: 'center' }}>
-
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         {isDemo ? (
-<Box display="flex" alignItems="center">
-<Typography data-test-id="p_live_demo_mode" sx={{ display: { xs: 'none', md: 'inherit' } }} color="primary">
-<FormattedMessage id="liveDemoMode" />
-</Typography>
-<Button
-
+          <Box display="flex" alignItems="center">
+            <Typography
+              data-test-id="p_live_demo_mode"
+              sx={{ display: { xs: "none", md: "inherit" } }}
+              // CHANGED: "primary" to "inherit" to take the parent's (toolbar's) white color
+              color="inherit"
+            >
+              <FormattedMessage id="liveDemoMode" />
+            </Typography>
+            <Button
               customClass={cx(classes.marginLeft1, classes.marginRight1)}
-
               disableElevation
-
               dataTestId="btn_register"
-
               messageId="register"
-
               variant="contained"
-
-              size={isDownSm ? 'small' : 'medium'}
-
+              size={isDownSm ? "small" : "medium"}
               color="success"
-
               onClick={onLiveDemoRegisterClick}
-
             />
-</Box>
-
+          </Box>
         ) : null}
- 
+
         {showOrganizationSelector && (
-<Box mr={1}>
-<OrganizationSelectorContainer isLoading={isOrganizationSelectorLoading} />
-</Box>
-
+          <Box mr={1}>
+            <OrganizationSelectorContainer isLoading={isOrganizationSelectorLoading} />
+          </Box>
         )}
-<HeaderButtons isProductTourAvailable={isProductTourAvailable} />
-</Box>
-</Toolbar>
-
+        {/* The HeaderButtons component will also inherit the white color for its icons */}
+        <HeaderButtons isProductTourAvailable={isProductTourAvailable} />
+      </Box>
+    </Toolbar>
   );
-
 };
  
 
