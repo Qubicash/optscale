@@ -13,10 +13,11 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: "space-between",
     // backgroundColor: theme.palette.info.header
 
-    // Set the background to black
-    backgroundColor: theme.palette.common.black,
-    // Set the default color for all text and icons within the toolbar to white
-    color: theme.palette.common.white
+ // We use !important to FORCE the background to be black, overriding all other styles.
+    backgroundColor: `${theme.palette.common.black} !important`,
+    
+    // We use !important to FORCE the default color for all children to be white.
+    color: `${theme.palette.common.white} !important`
   },
   logo: {
     [theme.breakpoints.down("md")]: {
